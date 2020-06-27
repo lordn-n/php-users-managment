@@ -1,8 +1,6 @@
 <?php
 require_once __ROOT__.'/system/models/User.php';
 
-dprint($_SERVER['REQUEST_METHOD']);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $alerts = array();
 
@@ -21,11 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = new User(null, null, $email, $password);
     $user_id = $user->search_by_email();
 
-    if ($user_id === false) {
+    if ($user_id === false || !password_verify($password, $user->password)) {
+        dprint($user_id);
+        dprint(password_verify($password, $user->password));
         array_push($alerts, 'Wrong credentials. Sorry :(');
     } else {
-        ob_end_clean();
         $_SESSION['logged'] = true;
+        $_SESSION['user'] = $user->id;
+
+        ob_end_clean();
         header('Location: /home');
         exit;
     }
@@ -37,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($user_id !== false) {
             array_push($alerts, 'User "'.$user->name.'" created successfully! you can now login!');
         }
+
+        unset($_SESSION['userid_created']);
     }
 }
 

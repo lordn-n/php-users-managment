@@ -3,7 +3,9 @@ define('PAGES_DIR', __ROOT__.'/system/pages');
 
 switch ($handler) {
     case 'home':
-        require_once PAGES_DIR.'/home.php';
+        $title = 'Home';
+        add_css('home');
+        add_js('home');
         break;
 
     case 'login':
@@ -24,12 +26,6 @@ switch ($handler) {
 
     case 'password-reset':
         require_once PAGES_DIR.'/password_reset.php';
-        break;
-
-    case 'home':
-        $title = 'Home';
-        add_css('signup');
-        add_js('signup');
         break;
 
     default:
