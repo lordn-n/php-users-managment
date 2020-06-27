@@ -29,8 +29,10 @@ switch ($handler) {
         break;
 
     default:
-        add_alert('Unknown page "<code>'.htmlspecialchars($handler).'</code>"');
-        unset($handler);
+        $title = 'Page not found';
+        $err_msg = 'Unknown page "<code>'.htmlspecialchars($handler).'</code>"';
+        $handler = 'error';
+        add_css('error');
         break;
 }
 
