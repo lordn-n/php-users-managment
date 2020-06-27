@@ -15,7 +15,8 @@ switch ($handler) {
         break;
 
     case 'logout':
-        require_once PAGES_DIR.'/logout.php';
+        $title = 'Logout';
+        add_css('logout');
         break;
 
     case 'signup':

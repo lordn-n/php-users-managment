@@ -10,6 +10,14 @@ if (array_key_exists('user', $_SESSION)) {
         header('Location: /login');
         exit;
     }
+} else {
+    // how do you get here? go login!
+    $_SESSION = array();
+    session_destroy();
+
+    ob_end_clean();
+    header('Location: /login');
+    exit;
 }
 
 include __ROOT__.'/system/pages/navbar.php';

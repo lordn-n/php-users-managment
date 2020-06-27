@@ -20,8 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $user->search_by_email();
 
     if ($user_id === false || !password_verify($password, $user->password)) {
-        dprint($user_id);
-        dprint(password_verify($password, $user->password));
         array_push($alerts, 'Wrong credentials. Sorry :(');
     } else {
         $_SESSION['logged'] = true;
@@ -41,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         unset($_SESSION['userid_created']);
+    } else {
+        // Destroy session in case you come back to login with a session
+        $_SESSION = array();
+        session_destroy();
     }
 }
 
