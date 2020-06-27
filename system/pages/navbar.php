@@ -12,22 +12,16 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item <?php echo ($home_page == '' || $home_page == 'home') ? 'active' : '' ?>">
+                <a class="nav-link" href="/home">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</span></a>
+            <li class="nav-item <?php echo $home_page == 'profile' ? 'active' : '' ?>">
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
         </ul>
         <ul class="navbar-nav px-3">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    User
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="/change-password">Change password</a>
-                    <a class="dropdown-item" href="/logout">Logout</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
     </div>

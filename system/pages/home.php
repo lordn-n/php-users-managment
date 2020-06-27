@@ -24,6 +24,12 @@ include __ROOT__.'/system/pages/navbar.php';
 ?>
 <main role="main" class="container">
     <div class="starter-template">
-        <h1>Welcome home <?php echo $user->name; ?></h1>
+        <?php
+            if (!isset($home_page)) {
+                echo "<h1>Welcome home $user->name</h1>";
+            } else {
+                include __ROOT__.'/system/pages/'.$home_page.'.php';
+            }
+        ?>
     </div>
 </main>

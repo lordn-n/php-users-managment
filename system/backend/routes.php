@@ -8,6 +8,14 @@ switch ($handler) {
         add_js('home');
         break;
 
+    case 'profile':
+        $title = 'Profile';
+        $home_page = 'profile';
+        $handler = 'home';
+        add_css('home');
+        add_js('home');
+        break;
+
     case 'login':
         $title = 'Login';
         add_css('login');
@@ -23,10 +31,6 @@ switch ($handler) {
         $title = 'Signup';
         add_css('signup');
         add_js('signup');
-        break;
-
-    case 'password-reset':
-        require_once PAGES_DIR.'/password_reset.php';
         break;
 
     default:
