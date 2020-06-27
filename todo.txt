@@ -1,0 +1,18 @@
+DONE
+
+TODO
+    1. Create a virtual box image with ubuntu.
+    2. Install LAMP
+    3. Program a registration page in php / javascript with the following characteristics
+
+    1. Create a Login page
+    2. Create a Signup page
+    3. Create a Lost Password page
+    4. Create a DB structure for storing the users.
+    5. Vanilla PHP, no external libraries are allowed, no PHP frameworks.
+    6. Any JS framework (jquery like) is allowed and bootstrap.
+
+    We will mostly check programming style, security and ease of use for the customer
+
+    Once ready, zip the virtual box image and upload it to a cloud drive. Provide us with the url, user and password for the virtual environment.
+
