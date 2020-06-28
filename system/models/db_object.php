@@ -32,7 +32,7 @@ class DBObject {
 
     function save() {
         $columns = $this->get_table_colum_names();
-        if (($key = array_search('id', $columns)) !== false) {
+        if (($key = array_search('id', $columns)) !== false && is_null($this->id)) {
             unset($columns[$key]);
         }
 
@@ -40,7 +40,18 @@ class DBObject {
         $values_str = ':'.implode(',:', $columns);
         $values = get_object_vars($this);
 
-        $sql = 'INSERT INTO '.$this->table.' ('.$cols_str.') VALUES ('.$values_str.')';
+        if (is_null($this->id)) {
+            $sql = 'INSERT INTO '.$this->table.' ('.$cols_str.') VALUES ('.$values_str.')';
+        } else {
+            $cols_values_str = '';
+            foreach ($columns as $col) {
+                if ($col != 'id') {
+                    $cols_values_str .= $col.'=:'.$col.',';
+                }
+            }
+            $cols_values_str = rtrim($cols_values_str, ',');
+            $sql = 'UPDATE '.$this->table.' SET '.$cols_values_str.' WHERE id=:id';
+        }
 
         if($stmt = $this->db->prepare($sql)){
             $param_values = array();
@@ -57,7 +68,11 @@ class DBObject {
             }
 
             if($stmt->execute($param_values)){
-                return $this->db->lastInsertId();
+                if (is_null($this->id)) {
+                    return $this->db->lastInsertId();
+                } else {
+                    return true;
+                }
             } else{
                 echo 'There was an error saving the '.$this->get_table_name();
                 return false;
@@ -65,6 +80,8 @@ class DBObject {
 
             unset($stmt);
         }
+
+        return true;
     }
 
     function search_by_id() {
